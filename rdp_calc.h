@@ -9,11 +9,4 @@
 
 typedef enum {
 	ident, number, opar, cpar, plus, minus, mult, div, mod
-} Token;
-
-typedef struct Node {
-	Token tok;
-	int   val; /* if tok == number */
-	struct Node *next;
-	struct Node *prev;
-} Node;
+} token_t;
