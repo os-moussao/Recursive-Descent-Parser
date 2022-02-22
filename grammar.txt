@@ -1,0 +1,12 @@
+expression grammar (BNF form):
+
+<expression>	::= "(" <expression> ")"
+				 |	<id> <op> <expression>
+				 |	<id>
+
+<id>			::= "(" <id> ")"
+				 |	<number>
+
+<op>			::= "+" | "-" | "*" | "/" | "%"
+
+<number>		::= integer
