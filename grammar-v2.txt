@@ -1,0 +1,9 @@
+Grammar version 2 - (with the help of @awbx):
+
+<expression>	::= ["+" | "-"] <term> {("+" | "-") <term>};
+
+<term>			::= <factor> {("*" | "/") <factor>}
+
+<factor>		::= <number> | "(" <expression> ")"
+
+<number>		::= integer
