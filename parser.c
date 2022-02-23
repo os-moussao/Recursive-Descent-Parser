@@ -41,6 +41,35 @@ int expect(token_t token)
 	return 1;
 }
 
+
+
+// <term> ::= <factor> {("*" | "/") <factor>}
+ASTreeNode_t *term()
+{
+	ASTreeNode_t *tree = NULL;
+
+	if (!Symp)
+		return NULL;
+
+	tree = factor();
+	if (tree == NULL) {
+		return NULL;
+	}
+
+	while (Symp && (Sym == mult || Sym == div_)) {
+		tree = ast_new(Sym, none, tree, NULL);
+		nextSymp;
+
+		tree->right = factor();
+		if (tree->right == NULL) {
+			ast_clear(tree);
+			return NULL;
+		}
+	}
+
+	return tree;
+}
+
 // <expression>	::= <term> {("+" | "-") <term>}
 ASTreeNode_t *expression()
 {
