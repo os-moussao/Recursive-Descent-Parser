@@ -41,6 +41,35 @@ int expect(token_t token)
 	return 1;
 }
 
+// <factor>		::= <number> | "(" <expression> ")"
+ASTreeNode_t *factor()
+{
+	ASTreeNode_t *tree = NULL;
+
+	if (!Symp)
+		return NULL;
+
+	if (Sym == number) {
+		tree = ast_new(Sym, Val, NULL, NULL);
+		nextSymp;
+		return tree;
+	}
+
+	else if (accept(opar)) {
+
+		tree = expression();
+
+		if (tree == NULL || !expect(cpar)) {
+			ast_clear(tree);
+			return NULL;
+		}
+
+		return tree;
+	}
+
+	else
+		return NULL;
+}
 
 
 // <term> ::= <factor> {("*" | "/") <factor>}
