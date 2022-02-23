@@ -1,4 +1,35 @@
-#include "lexer.h"
+#include "rdp_calc.h"
+
+int lexer_atoi(char **expr)
+{
+	int	res;
+
+	res = 0;
+	while (**expr >= '0' && **expr <= '9')
+		res = res * 10 + *(*expr)++ - '0';
+	return (res);
+}
+
+token_t getToken(char c)
+{
+	switch (c)
+	{
+		case '(':
+			return opar;
+		case ')':
+			return cpar;
+		case '+':
+			return plus;
+		case '-':
+			return minus;
+		case '*':
+			return mult;
+		case '/':
+			return div_;
+		default:
+			return unknown;
+	}
+}
 
 lexer_t	*lexer(char *expr)
 {
