@@ -6,4 +6,4 @@ Grammar version 2 - (with the help of @awbx):
 
 <factor>		::= <number> | "(" <expression> ")"
 
-<number>		::= integer
+<number>		::= positive integer
