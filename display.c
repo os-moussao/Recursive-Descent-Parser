@@ -18,4 +18,45 @@ void displayTokens(Node *tokens)
 	printf("Tokens End:\n");
 	fflush(stdout);
 }
+
+void displayExpression_(ASTreeNode_t *tree)
+{
+	if (tree == NULL)
+		return ;
+
+	if (tree->type != number)
+		printf("(");
+
+	if (tree->left)
+	{
+		displayExpression_(tree->left);
+		printf(" ");
+	}
+
+	if (tree->type == number)
+		printf("%d", tree->value);
+	else
+		printf("%s", lexeme[tree->type]);
+
+	if (tree->right)
+	{
+		printf(" ");
+		displayExpression_(tree->right);
+	}
+
+	if (tree->type != number)
+		printf(")");
+}
+
+
+void displayExpression(ASTreeNode_t *tree)
+{
+	printf(KYEL);
+	printf("\nExpression Precedence: ");
+	printf(KBLU);
+	displayExpression_(tree);
+	printf(KNRM);
+	fflush(stdout);
+}
+
 }
