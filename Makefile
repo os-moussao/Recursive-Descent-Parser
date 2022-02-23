@@ -1,13 +1,28 @@
-all: parser
+NAME = rdp_calc
 
-%: %.c
-	cc $< -o $@.out
+SRC = main.c lexer.c parser.c display.c
 
-%.out: %.c
-	cc $< -o $@
+OBJ = $(SRC:%.c=%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	cc -o $@ $^
+
+%.o: %.c
+	cc -c $< -o $@ -I include/
 
 clean:
-	rm -f *.out
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+run: re
+	./$(NAME)
 
 # alias
 cl: clean
+fcl: fclean
