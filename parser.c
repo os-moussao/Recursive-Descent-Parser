@@ -41,6 +41,32 @@ int expect(token_t token)
 	return 1;
 }
 
+// <expression>	::= <term> {("+" | "-") <term>}
+ASTreeNode_t *expression()
+{
+	ASTreeNode_t *tree = NULL;
+
+	if (!Symp)
+		return NULL;
+
+	tree = term();
+	if (tree == NULL) {
+		return NULL;
+	}
+
+	while (Symp && (Sym == plus || Sym == minus)) {
+		tree = ast_new(Sym, none, tree, NULL);
+		nextSymp;
+
+		tree->right = term();
+		if (tree->right == NULL) {
+			ast_clear(tree);
+			return NULL;
+		}
+	}
+
+	return tree;
+}
 
 // Constructor function
 ASTreeNode_t *ast_new(token_t type, int value, ASTreeNode_t *left, ASTreeNode_t *right)
