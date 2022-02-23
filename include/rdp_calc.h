@@ -4,9 +4,10 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "lexer.h"
 
 #define MAXSIZE 1024
 
-typedef enum {
-	ident, number, opar, cpar, plus, minus, mult, div, mod
-} token_t;
+void dispTokens(Node *tokens);
