@@ -59,6 +59,30 @@ void displayExpression(ASTreeNode_t *tree)
 	fflush(stdout);
 }
 
+void displayASTree_(ASTreeNode_t *tree, int ident_level)
+{
+	if (tree == NULL)
+		return ;
+	for (int i = 0; i < ident_level; i++) {
+		printf("├   ");
+	}
+	printf("├── %s ", name[tree->type]);
+	if (tree->type == number)
+		printf("(%d)\n", tree->value);
+	else
+		printf("(%s)\n", lexeme[tree->type]);
+	displayASTree_(tree->right, ident_level + 1);
+	displayASTree_(tree->left, ident_level + 1);
+}
+
+void displayASTree(ASTreeNode_t *tree)
+{
+	printf("%s\nAbstract Syntax Tree:\n", KYEL);
+	printf(KGRN);
+	displayASTree_(tree, 0);
+	printf(KNRM);
+	fflush(stdout);
+}
 
 void error(char *format, ...)
 {
