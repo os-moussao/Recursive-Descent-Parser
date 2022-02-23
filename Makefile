@@ -1,16 +1,18 @@
 NAME = rdp_calc
 
-SRC = main.c lexer.c parser.c display.c
+SRC = main.c lexer.c parser.c display.c eval.c
 
 OBJ = $(SRC:%.c=%.o)
+
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	cc -o $@ $^
+	cc $(CFLAGS) -o $@ $^
 
 %.o: %.c
-	cc -c $< -o $@ -I include/
+	cc $(CFLAGS) -o $@ -c $< -I include/
 
 clean:
 	rm -f $(OBJ)
@@ -22,6 +24,9 @@ re: fclean all
 
 run: re
 	./$(NAME)
+
+debug:
+	cc -g $(SRC) -I include -o $(NAME)
 
 # alias
 cl: clean
