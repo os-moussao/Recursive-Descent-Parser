@@ -49,7 +49,7 @@ lexer_t	*lexer(char *expr)
 			token_t token = getToken(*expr);
 			if (token == unknown)
 			{
-				fprintf(stderr, "lexer: unknown token '%c'\n", *expr);
+				error("lexer: unknown token '%c'\n", *expr);
 				list_clear(tokens);
 				return NULL;
 			}
