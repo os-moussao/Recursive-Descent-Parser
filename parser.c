@@ -41,3 +41,27 @@ int expect(token_t token)
 	return 1;
 }
 
+
+// Constructor function
+ASTreeNode_t *ast_new(token_t type, int value, ASTreeNode_t *left, ASTreeNode_t *right)
+{
+	ASTreeNode_t *node;
+
+	node = (ASTreeNode_t *)malloc(sizeof(ASTreeNode_t));
+	node->type = type;
+	node->value = value;
+	node->left = left;
+	node->right = right;
+
+	return node;
+}
+
+// Destructor function
+void	ast_clear(ASTreeNode_t *tree)
+{
+	if (tree == NULL)
+		return ;
+	ast_clear(tree->left);
+	ast_clear(tree->right);
+	free(tree);
+}
