@@ -59,4 +59,15 @@ void displayExpression(ASTreeNode_t *tree)
 	fflush(stdout);
 }
 
+
+void error(char *format, ...)
+{
+	va_list ap;
+
+	fprintf(stderr, KRED);
+	va_start(ap, format);
+	vfprintf(stderr, format, ap);
+	va_end(ap);
+	fprintf(stderr, KNRM);
+	fflush(stderr);
 }
