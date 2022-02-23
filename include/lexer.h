@@ -1,10 +1,12 @@
 #pragma once
 
-#include "rdp_calc.h"
+typedef enum {
+	number, opar, cpar, plus, minus, mult, div_, unknown
+} token_t;
 
 typedef struct Node {
 	token_t tok;
-	int     val; /* if tok == number */
+	int     val; // if tok == number
 	struct Node *next;
 	struct Node *prev;
 } Node;
