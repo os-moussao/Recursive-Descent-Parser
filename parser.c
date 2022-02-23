@@ -22,3 +22,22 @@ ASTreeNode_t *parser(lexer_t *tokens)
 
 	return ASTree;
 }
+
+int	accept(token_t token)
+{
+	if (Sym == token) {
+		nextSymp;
+		return 1;
+	}
+	return 0;
+}
+
+int expect(token_t token)
+{
+	if (!accept(token)) {
+		error("expect: unexpected token");
+		return 0;
+	}
+	return 1;
+}
+
