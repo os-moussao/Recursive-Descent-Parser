@@ -29,7 +29,7 @@ ASTreeNode_t *parser(lexer_t *tokens)
 	return ASTree;
 }
 
-int	accept(token_t token)
+int accept(token_t token)
 {
 	if (Sym == token) {
 		nextSymp;
@@ -38,13 +38,46 @@ int	accept(token_t token)
 	return 0;
 }
 
-int expect(token_t token)
+int expect(token_t expected_token)
 {
-	if (!Symp || !accept(token)) {
-		error("expect: unexpected token\n");
+	if (!accept(expected_token)) {
+		
+		// check if this is the first error in the expression
+		if (!error_free)
+			return 0;
+		
+		// if so, process the error
+		if (Sym == endofexpr || Sym == number)
+			error("expect: found %s when expecting a '%s'\n", lexeme[Sym], lexeme[expected_token]);
+
+		else
+			error("expect: found '%s' when expecting a '%s'\n", lexeme[Sym], lexeme[expected_token]);
+		
+		// lock: set error_free to 0
+		error_free = 0;
+
 		return 0;
 	}
 	return 1;
+}
+
+void unexpect(char *msg)
+{
+	// check if this is the first error in the expression
+	if (!error_free)
+		return ;
+
+	// if so, process the error
+	if (msg && *msg)
+		error("%s: ", msg);
+	error("unexpected token '%s' ", lexeme[Sym]);
+	if (Symp->prev)
+		error("after '%s'\n", lexeme[Symp->prev->tok]);
+	else
+		error("in the beginning of the expression\n");
+	
+	// lock: set error_free to 0
+	error_free = 0;
 }
 
 // <factor>		::= <number> | "(" <expression> ")"
