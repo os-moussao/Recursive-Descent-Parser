@@ -2,8 +2,10 @@
 
 #include "rdp_calc.h"
 
+#define TOKENS_NUMBER 9
+
 typedef enum {
-	number, opar, cpar, plus, minus, mult, div_, unknown
+	number, opar, cpar, plus, minus, mult, div_, endofexpr, unknown
 } token_t;
 
 typedef struct Node {
