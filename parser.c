@@ -34,7 +34,7 @@ int	accept(token_t token)
 
 int expect(token_t token)
 {
-	if (!accept(token)) {
+	if (!Symp || !accept(token)) {
 		error("expect: unexpected token");
 		return 0;
 	}
