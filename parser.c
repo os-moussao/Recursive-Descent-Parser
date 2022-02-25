@@ -19,10 +19,12 @@ ASTreeNode_t *parser(lexer_t *tokens)
 {
 	initSymp;
 
+	error_free = 1;
 	ASTreeNode_t *ASTree = expression();
-	if (ASTree == NULL || Symp) {
+	if (ASTree == NULL || (Symp && !isEnd)) {
 		ast_clear(ASTree);
-		error("parser: syntax error\n");
+		if (Symp)
+			unexpect("parser");
 		return (NULL);
 	}
 
