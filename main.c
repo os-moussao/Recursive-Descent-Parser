@@ -26,7 +26,7 @@ int main(void)
 		if (!tokens)
 			continue ;
 
-		if (!tokens->len) {
+		if (tokens->len <= 1) {
 			list_clear(tokens);
 			continue ;
 		}
