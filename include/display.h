@@ -11,6 +11,9 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
+extern const char	*name[TOKENS_NUMBER];
+extern const char	*lexeme[TOKENS_NUMBER];
+
 void displayTokens(Node *tokens);
 void displayExpression(ASTreeNode_t *tree);
 void displayASTree(ASTreeNode_t *tree);
