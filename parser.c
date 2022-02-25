@@ -10,6 +10,10 @@
 // global variable holding the current Symbol
 Node *Symp;
 
+// Some expressions have many syntax errors, do not print them all
+// print only the first error encountered, and set error_free to 0
+bool	error_free;
+
 // Parser function
 ASTreeNode_t *parser(lexer_t *tokens)
 {
