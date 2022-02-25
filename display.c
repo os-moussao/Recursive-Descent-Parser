@@ -1,11 +1,11 @@
 #include "rdp_calc.h"
 
-const char *name[] = {
-	"number", "opar", "cpar", "plus", "minus", "mult", "div_", "unknown"
+const char *name[TOKENS_NUMBER] = {
+	"number", "opar", "cpar", "plus", "minus", "mult", "div", "end-of-expression", "unknown"
 };
 
-const char *lexeme[] = {
-	"", "(", ")", "+", "-", "*", "/", "unknown"
+const char *lexeme[TOKENS_NUMBER] = {
+	"<number>", "(", ")", "+", "-", "*", "/", "end-of-expression", "unknown"
 };
 
 void displayTokens(Node *tokens)
