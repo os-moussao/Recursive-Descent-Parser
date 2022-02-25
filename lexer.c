@@ -49,14 +49,15 @@ lexer_t	*lexer(char *expr)
 			token_t token = getToken(*expr);
 			if (token == unknown)
 			{
-				error("lexer: unknown token '%c'\n", *expr);
+				error("lexer: invalid token '%c'\n", *expr);
 				list_clear(tokens);
 				return NULL;
 			}
-			push_back(tokens, new_node(token, 0));
+			push_back(tokens, new_node(token, none));
 			expr++;
 		}
 	}
+	push_back(tokens, new_node(endofexpr, none));
 	return tokens;
 }
 
