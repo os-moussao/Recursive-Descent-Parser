@@ -107,7 +107,10 @@ ASTreeNode_t *factor()
 	}
 
 	else
+	{
+		unexpect("factor");
 		return NULL;
+	}
 }
 
 
@@ -124,7 +127,7 @@ ASTreeNode_t *term()
 		return NULL;
 	}
 
-	while (Symp && (Sym == mult || Sym == div_)) {
+	while (!isEnd && (Sym == mult || Sym == div_)) {
 		tree = ast_new(Sym, none, tree, NULL);
 		nextSymp;
 
@@ -151,7 +154,7 @@ ASTreeNode_t *expression()
 		return NULL;
 	}
 
-	while (Symp && (Sym == plus || Sym == minus)) {
+	while (!isEnd && (Sym == plus || Sym == minus)) {
 		tree = ast_new(Sym, none, tree, NULL);
 		nextSymp;
 
