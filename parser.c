@@ -16,8 +16,10 @@ ASTreeNode_t *parser(lexer_t *tokens)
 	initSymp;
 
 	ASTreeNode_t *ASTree = expression();
-	if (ASTree == NULL) {
+	if (ASTree == NULL || Symp) {
+		ast_clear(ASTree);
 		error("parser: syntax error\n");
+		return (NULL);
 	}
 
 	return ASTree;
@@ -35,7 +37,7 @@ int	accept(token_t token)
 int expect(token_t token)
 {
 	if (!Symp || !accept(token)) {
-		error("expect: unexpected token");
+		error("expect: unexpected token\n");
 		return 0;
 	}
 	return 1;
