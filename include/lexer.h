@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rdp_calc.h"
+
 typedef enum {
 	number, opar, cpar, plus, minus, mult, div_, unknown
 } token_t;
